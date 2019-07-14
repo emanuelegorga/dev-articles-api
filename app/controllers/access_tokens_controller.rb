@@ -4,7 +4,11 @@ class AccessTokensController < ApplicationController
 		authenticator.perform
 
 		render json: serializer.new(authenticator.access_token, status: :created)
-	end
+  end
+
+  def destroy
+    raise AuthorizationError
+  end
 
 	private
 
