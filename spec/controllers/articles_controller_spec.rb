@@ -55,5 +55,18 @@ describe ArticlesController do
 				'slug' => article.slug
 			})
 		end
-	end
+  end
+  
+  describe '#create' do
+    subject { post :create }
+
+    context 'when no code is provided' do
+      it_behaves_like 'forbidden_requests'
+    end
+
+    context 'when invalid code is provided' do
+      before { request.headers['authorization'] = 'Invalid token' }
+      it_behaves_like 'forbidden_requests'
+    end
+  end
 end
