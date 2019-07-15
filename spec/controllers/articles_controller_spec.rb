@@ -68,5 +68,39 @@ describe ArticlesController do
       before { request.headers['authorization'] = 'Invalid token' }
       it_behaves_like 'forbidden_requests'
     end
+
+    context 'when authorized' do
+      let(:access_token) { create :access_token }
+      before { request.headers['authorization'] = "Bearer #{access_token.token}" }
+
+      context 'when invalid parameters provided' do
+        subject { post :create, params: invalid_attributes }
+        let(:invalid_attributes) do
+          { 
+            data: {
+              attributes: {
+                title: '',
+                content: ''
+              }
+            }
+          }
+        end
+
+        it 'should return 422 status code' do
+          subject
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'should return proper json error' do
+          subject
+          expect(json['errors']).to include({
+            "status" => "422",
+            "source" => { "pointer" => "data/attributes/title" },
+            "title" =>  "can't be blank",
+            "detail" => "The title you provided cannot be blank."
+          })
+        end
+      end
+    end
   end
 end
