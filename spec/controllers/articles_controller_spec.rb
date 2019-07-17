@@ -14,10 +14,10 @@ describe ArticlesController do
 			subject
 			Article.recent.each_with_index do |article, index|
 				expect(json_data[index]['attributes']).to eq({
-					"title" => article.title, 
-					"content" => article.content, 
+					"title" => article.title,
+					"content" => article.content,
 					"slug" => article.slug
-				})						
+				})
 			end
 		end
 
@@ -56,7 +56,7 @@ describe ArticlesController do
 			})
 		end
   end
-  
+
   describe '#create' do
     subject { post :create }
 
@@ -76,7 +76,7 @@ describe ArticlesController do
       context 'when invalid parameters provided' do
         subject { post :create, params: invalid_attributes }
         let(:invalid_attributes) do
-          { 
+          {
             data: {
               attributes: {
                 title: '',
