@@ -1,4 +1,4 @@
-# class ErrorSerializer
+# class ErrorSerializer < ActiveModel::Serializer::ErrorSerializer
 #   def initialize(error)
 #     @error = error
 #   end
