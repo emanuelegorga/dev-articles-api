@@ -36,6 +36,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'fast_jsonapi'
   gem 'jsonapi_errors_handler'
+  gem 'active_model_serializers', '~> 0.10.2'
 end
 
 group :development do

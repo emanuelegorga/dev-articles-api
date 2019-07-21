@@ -15,7 +15,9 @@ class ArticlesController < ApplicationController
 
     if article.valid?
     else
-      raise JsonapiErrorsHandler::Errors::Invalid
+      render json: article, adapter: :json_api,
+      serializer: ActiveModel::Serializer::ErrorSerializer,
+      status: :unprocessable_entity
     end
   end
 

@@ -90,6 +90,24 @@ describe ArticlesController do
           subject
           expect(response).to have_http_status(:unprocessable_entity)
         end
+
+        it 'should return proper json error' do
+          subject
+          expect(json['errors']).to include(
+            {
+              "source" => { "pointer" => "/data/attributes/title" },
+              "detail" =>  "can't be blank"
+            },
+            {
+              "source" => { "pointer" => "/data/attributes/content" },
+              "detail" =>  "can't be blank"
+            },
+            {
+              "source" => { "pointer" => "/data/attributes/slug" },
+              "detail" =>  "can't be blank"
+            }
+          )
+        end
       end
     end
   end
