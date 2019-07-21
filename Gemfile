@@ -37,6 +37,7 @@ group :development, :test do
   gem 'fast_jsonapi'
   gem 'jsonapi_errors_handler'
   gem 'active_model_serializers', '~> 0.10.2'
+  gem 'pry-byebug'
 end
 
 group :development do
