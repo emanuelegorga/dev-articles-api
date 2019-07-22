@@ -11,9 +11,9 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    article = Article.new(article_params) 
+    article = Article.new(article_params)
     article.save!
-    render json: serializer.new(article, status: :created)
+    render status: :created, json: serializer.new(article)
   rescue
     render json: article, adapter: :json_api,
       serializer: ActiveModel::Serializer::ErrorSerializer,

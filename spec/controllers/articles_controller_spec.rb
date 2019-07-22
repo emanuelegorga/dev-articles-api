@@ -128,9 +128,9 @@ describe ArticlesController do
 
         subject { post :create, params: valid_attributes }
 
-        it 'should have 200 status code' do
+        it 'should have 201 status code' do
           subject
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:created)
         end
 
         it 'should have proper json body' do
