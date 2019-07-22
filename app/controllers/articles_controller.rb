@@ -11,9 +11,21 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    article = Article.new(article_params)
+    article = current_user.articles.build(article_params)
     article.save!
     render status: :created, json: serializer.new(article)
+  rescue
+    render json: article, adapter: :json_api,
+      serializer: ActiveModel::Serializer::ErrorSerializer,
+      status: :unprocessable_entity
+  end
+
+  def update
+    article = current_user.articles.find(params[:id])
+    article.update_attributes!(article_params)
+    render status: :ok, json: serializer.new(article)
+  rescue ActiveRecord::RecordNotFound
+    authorization_error
   rescue
     render json: article, adapter: :json_api,
       serializer: ActiveModel::Serializer::ErrorSerializer,
