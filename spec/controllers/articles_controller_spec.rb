@@ -15,7 +15,8 @@ describe ArticlesController do
 			Article.recent.each_with_index do |article, index|
 				expect(json_data[index]['attributes']).to eq({
 					"title" => article.title,
-					"content" => article.content,
+          "content" => article.content,
+          "id" => article.id,
 					"slug" => article.slug
 				})
 			end
@@ -51,7 +52,8 @@ describe ArticlesController do
 			subject
 			expect(json_data['attributes']).to eq({
 				'title' => article.title,
-				'content' => article.content,
+        'content' => article.content,
+        'id' => article.id,
 				'slug' => article.slug
 			})
 		end

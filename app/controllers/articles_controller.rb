@@ -47,6 +47,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:data).require(:attributes).permit(:title, :content, :slug) || ActionController::Parameters.new
+    params.require(:data).require(:attributes).
+      permit(:title, :content, :slug) || ActionController::Parameters.new
   end
 end
