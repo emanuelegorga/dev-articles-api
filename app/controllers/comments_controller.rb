@@ -1,11 +1,10 @@
 class CommentsController < ApplicationController
   skip_before_action :authorize!, only: [:index]
-  before_action :load_article, only: [:create]
+  before_action :load_article
 
   def index
-    @comments = Comment.all
-
-    render json: @comments
+    comments = @article.comments
+    render json: serializer.new(comments)
   end
 
   def create
@@ -21,6 +20,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def serializer
+		CommentSerializer
+  end
 
   def load_article
     @article = Article.find(params[:article_id])
