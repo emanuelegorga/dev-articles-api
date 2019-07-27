@@ -24,6 +24,9 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'kaminari'
 gem 'octokit', '~> 4.0'
+gem 'fast_jsonapi'
+gem 'active_model_serializers', '~> 0.10.2'
+gem 'jsonapi_errors_handler'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
@@ -37,9 +40,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'fast_jsonapi'
-  gem 'jsonapi_errors_handler'
-  gem 'active_model_serializers', '~> 0.10.2'
   gem 'pry-byebug'
 end
 
