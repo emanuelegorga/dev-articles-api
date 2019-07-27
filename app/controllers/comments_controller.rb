@@ -15,12 +15,27 @@ class CommentsController < ApplicationController
 
     if @comment.save
       render json: @comment, status: :created, location: @article
+      # render json: serializer.new(@comment), status: :created, location: @article
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
   end
 
+  # def create
+  #   article = current_user.articles.build(article_params)
+  #   article.save!
+  #   render status: :created, json: serializer.new(article)
+  # rescue
+  #   render json: article, adapter: :json_api,
+  #     serializer: ActiveModel::Serializer::ErrorSerializer,
+  #     status: :unprocessable_entity
+  # end
+
   private
+
+  def serializer
+		ArticleSerializer
+  end
 
   def load_article
     @article = Article.find(params[:article_id])

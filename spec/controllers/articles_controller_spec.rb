@@ -24,7 +24,7 @@ describe ArticlesController do
 		it 'should return articles in chronologial order' do
 			old_article = create :article
 			newer_article = create :article
-			subject
+      subject
 			expect(json_data.first['id']).to eq(newer_article.id.to_s)
 			expect(json_data.last['id']).to eq(old_article.id.to_s)
 		end
