@@ -1,11 +1,54 @@
 require 'rails_helper'
 
 RSpec.describe AccessTokensController, type: :controller do
-	describe '#create' do
+  describe '#create' do
+    let(:params) do
+      {
+        data: {
+          attributes: { login: 'emanuele', password: 'secret' }
+        }
+      }
+    end
+
 		context 'when no auth_data code is provided' do
 			subject { post :create }
 			it_behaves_like 'unauthorized_standard_requests'
-		end
+    end
+    
+    context 'when invalid login provided' do
+      let(:user) { create :user, login: 'invalid', password: 'secret' }
+      subject { post :create, params: params }
+      before { user }
+
+      it_behaves_like 'unauthorized_standard_requests'
+    end
+
+    context 'when invalid password provided' do
+      let(:user) { create :user, login: 'emanuele', password: 'invalid' }
+      subject { post :create, params: params }
+      before { user }
+      
+      it_behaves_like 'unauthorized_standard_requests'
+    end
+
+    context 'when valid credentials provided' do
+      let(:user) { create :user, login: 'emanuele', password: 'secret' }
+      subject { post :create, params: params }
+      before { user }
+      
+      it 'should return 201 status code' do
+				subject
+				expect(response).to have_http_status(:created)
+			end
+
+      it 'should return proper json body' do
+        subject
+				hash = { json_data['attributes'].keys[1] => json_data['attributes'].values[1] }
+				expect(hash).to eq(
+					{ 'token' => user.access_token.token }
+				)
+			end
+    end
 
 		context 'when invalid code is provided' do
 			let(:github_error) {
