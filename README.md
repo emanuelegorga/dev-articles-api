@@ -22,7 +22,7 @@ Endpoints:
 
 - sign_up => post '/sign_up'
 
-You will need to choose an username and a password:
+You will need to choose an username and password:
 
 SIGN UP REQUEST BODY:
 ```json
