@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.1'
 
 gem 'rails', '~> 6.0.2'
+gem 'pg'
 gem 'puma'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'kaminari'
@@ -19,12 +20,8 @@ gem 'webpacker'
 # gem 'turbolinks'
 # gem 'jbuilder'
 
-group :production do
-  gem 'pg'
-end
-
 group :development, :test do
-  gem 'sqlite3'
+  # gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
