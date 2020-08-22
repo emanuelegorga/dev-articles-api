@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments, only: [:index, :create]
   end
+
+  get '/healthcheck', to: 'healthcheck#index'
 end
