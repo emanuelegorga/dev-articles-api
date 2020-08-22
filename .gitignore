@@ -34,3 +34,6 @@ Gemfile.lock
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.env
+data
+vendor/cache
